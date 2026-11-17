@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> chuska cafe | Artisan Roasters, Fresh Bakes & Cozy Moments</title>
+  <meta name="description"
+    content="chuska cafe - Experience handcrafted artisanal coffee, freshly baked sourdough pastries, and wholesome gourmet brunches in a lush, warm botanical haven.">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@300..700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration for Chuska Cafe Palette -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            coco: {
+              espresso: '#1A120B',
+              roast: '#2B1B12',
+              mocha: '#3D251E',
+              caramel: '#C86D3B',
+              caramelHover: '#B05927',
+              crema: '#E6A15C',
+              gold: '#DFB15B',
+              latte: '#F5EBE1',
+              cream: '#FAF6F0',
+              sand: '#EFE7DA',
+              forest: '#2D5A3C',
+              forestLight: '#E8F2EC'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif']
+          },
+          boxShadow: {
+            'warm-sm': '0 2px 10px rgba(43, 27, 18, 0.05)',
+            'warm': '0 8px 30px rgba(43, 27, 18, 0.08)',
+            'warm-lg': '0 16px 40px rgba(43, 27, 18, 0.12)',
+            'warm-xl': '0 24px 60px rgba(43, 27, 18, 0.16)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #FAF6F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #C86D3B;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B05927;
+    }
+
+    /* Soft Animation Keyframes */
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .animate-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    /* Glassmorphism helpers */
+    .glass-nav {
+      background: rgba(250, 246, 240, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .glass-dark {
+      background: rgba(26, 18, 11, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Modal Transitions */
+    .modal-backdrop {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      transform: scale(0.95) translateY(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-coco-cream text-coco-espresso font-sans antialiased selection:bg-coco-caramel selection:text-white">
+
+  <!-- ==================== TOP ANNOUNCEMENT BAR ==================== -->
+  <div
+    class="bg-coco-espresso text-coco-latte text-xs font-display tracking-wider py-2 px-4 border-b border-coco-mocha/40">
+    <div
+      class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span
+          class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-coco-caramel text-white uppercase tracking-wider animate-pulse">Special</span>
+        <span>Autumn Special: Spiced Orange Pound Cake & Citrus Infusion Brew available this week!</span>
+      </div>
+      <div class="flex items-center gap-5 text-[11px] text-coco-sand">
+        <div class="flex items-center gap-1.5" id="headerStatusPill">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="text-white font-medium" id="headerStatusText">Open Now until 10:30 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== STICKY NAVIGATION ==================== -->
+  <header id="mainHeader" class="sticky top-0 z-40 transition-all duration-300 border-b border-coco-roast/5 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div
+            class="w-11 h-11 rounded-2xl bg-coco-roast text-coco-latte flex items-center justify-center shadow-warm transition-transform group-hover:scale-105 group-hover:bg-coco-caramel">
+            <i data-lucide="coffee" class="w-6 h-6 text-coco-crema group-hover:text-white transition-colors"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-coco-espresso">Chuska</span>
+              <span class="font-serif text-2xl sm:text-3xl font-normal italic text-coco-caramel">Cafe</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-coco-roast">
+          <a href="#about" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Our Story
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#menu" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Menu
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#gallery" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Ambience
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#reviews" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Reviews
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#location" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Location & Hours
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#contact" class="hover:text-coco-caramel transition-colors py-2 relative group">
+            Contact
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-coco-caramel transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+
+        <!-- Right Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <button onclick="openOrderDrawer()"
+            class="relative p-2.5 rounded-full hover:bg-coco-sand/50 text-coco-roast transition-colors"
+            title="View Order Bag">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span id="cartCountBadge"
+              class="absolute -top-1 -right-1 bg-coco-caramel text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
+          </button>
+          <a href="#reservation"
+            class="inline-flex items-center gap-2 bg-coco-caramel hover:bg-coco-caramelHover text-white px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide shadow-warm transition-all duration-200 hover:shadow-warm-lg hover:-translate-y-0.5 active:translate-y-0">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <span>Reserve Table</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button onclick="openOrderDrawer()" class="relative p-2 text-coco-roast">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            <span id="cartCountBadgeMobile"
+              class="absolute 0 top-0 right-0 bg-coco-caramel text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+          </button>
+          <button id="mobileMenuBtn" aria-label="Toggle Navigation Menu"
+            class="p-2 rounded-xl text-coco-roast hover:bg-coco-sand/40 transition-colors">
+            <i data-lucide="menu" id="menuIcon" class="w-7 h-7"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu"
+      class="hidden lg:hidden border-t border-coco-roast/10 bg-coco-cream/98 backdrop-blur-xl px-4 pt-4 pb-6 transition-all duration-300">
+      <div class="flex flex-col space-y-3 font-medium text-coco-roast">
+        <a href="#about"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Our Story</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <a href="#menu"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Our Menu</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <a href="#gallery"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Ambience & Gallery</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <a href="#reviews"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Guest Reviews</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <a href="#location"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Location & Hours</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <a href="#contact"
+          class="mobile-link px-3 py-2 rounded-lg hover:bg-coco-sand/40 flex items-center justify-between">
+          <span>Get in Touch</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-coco-mocha/50"></i>
+        </a>
+        <div class="pt-3 border-t border-coco-sand/60">
+          <a href="#reservation"
+            class="mobile-link w-full bg-coco-caramel hover:bg-coco-caramelHover text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-warm">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <span>Book a Table Now</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero"
+      class="relative min-h-[92vh] lg:min-h-[96vh] flex flex-col justify-start overflow-hidden pt-5 sm:pt-7 pb-20 sm:pb-32">
+      <!-- Background Hero Image with Warm Ambient Overlay -->
+      <div class="absolute inset-0 z-0">
+        <img src="images/hero-interior.jpg" alt="Chuska Cafe warm interior with hanging greenery and cozy lighting"
+          class="w-full h-full object-cover object-center filter brightness-[0.40] saturate-[1.08] transition-transform duration-1000 ease-out"
+          id="heroBgImage">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-coco-espresso/95 via-coco-espresso/80 to-coco-espresso/35">
+        </div>
+      </div>
+
+      <!-- Top Center Pill Badge: "Welcome to Chuska Sanctuary" (Upar ek dam, Center Aligned) -->
+      <div class="relative z-10 w-full flex justify-center px-4 mb-4 sm:mb-6">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full shadow-warm">
+          <span class="w-2 h-2 rounded-full bg-coco-crema animate-pulse"></span>
+          <span class="text-xs sm:text-sm font-display tracking-widest uppercase text-coco-latte">Welcome to Chuska Sanctuary</span>
+        </div>
+      </div>
+
+      <!-- Hero Content (Main Heading Left-Aligned, flush with Chuska Cafe navbar logo corner) -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left text-white w-full">
+        <div class="max-w-2xl">
+          <!-- Main Title (Left Aligned, starting right from the corner) -->
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-white mb-5 leading-[1.2]">
+            Where Every Pour Tells <br class="hidden sm:inline">
+            <span class="italic font-normal text-coco-crema inline-block relative mt-1">
+              An Artisan Story
+              <!-- Left-aligned subtle golden accent line -->
+              <span class="block h-1 w-28 sm:w-36 bg-gradient-to-r from-coco-crema to-transparent mt-2 rounded-full"></span>
+            </span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="max-w-xl text-base sm:text-lg text-coco-latte/90 font-light mb-9 leading-relaxed">
+            Nestled under cascading green ferns and warm amber glow. Sip hand-roasted micro-lot coffees, savor oven-fresh
+            French pastries, and relax in the heart of the city.
+          </p>
+
+          <!-- CTA Action Buttons -->
+          <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <a href="#menu"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-coco-caramel hover:bg-coco-caramelHover text-white px-8 py-4 rounded-full font-semibold text-sm sm:text-base shadow-warm-lg hover:shadow-warm-xl transition-all duration-300 hover:-translate-y-0.5">
+              <i data-lucide="utensils" class="w-4 h-4"></i>
+              <span>Explore Our Menu</span>
+            </a>
+            <a href="#reservation"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-white/30 px-8 py-4 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:-translate-y-0.5">
+              <i data-lucide="clock" class="w-4 h-4 text-coco-crema"></i>
+              <span>Reserve a Cozy Table</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seamless Smooth Transition to Cream Section -->
+      <div
+        class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-coco-cream via-coco-cream/60 to-transparent pointer-events-none">
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT & STORYTELLING SECTION ==================== -->
+    <section id="about" class="py-20 sm:py-28 bg-coco-cream relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+          <!-- Image Collage Displaying Ambience & Barista Craft -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative z-10 rounded-3xl overflow-hidden shadow-warm-xl border-4 border-white">
+              <img src="images/barista-pour.jpg" alt="Barista creating latte art at Chuska Cafe"
+                class="w-full h-[420px] object-cover hover:scale-105 transition-transform duration-700">
+            </div>
+
+            <!-- Warm Circle Accent Backdrop -->
+            <div class="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-coco-sand/50 -z-0 blur-2xl"></div>
+          </div>
+
+          <!-- Story Text Content -->
+          <div class="lg:col-span-6 space-y-6">
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-coco-espresso leading-tight">
+              A Warm Sanctuary Crafted for <span class="italic font-normal text-coco-caramel">Coffee Enthusiasts</span>
+            </h2>
+
+            <p class="text-coco-roast/80 text-base sm:text-lg leading-relaxed">
+              Founded in 2021, Chuska Cafe was born out of a simple yearning: to create an unhurried, lush sanctuary
+              where the aroma of freshly ground single-origin beans meets honest, handcrafted cuisine.
+            </p>
+
+            <p class="text-coco-roast/75 text-sm sm:text-base leading-relaxed">
+              We partner directly with sustainable coffee estates across Ethiopia, Colombia, and Chikmagalur. From our
+              slow cold brews to our flaky double-baked almond croissants, nothing is rushed. We invite you to stay a
+              while, read a book under the hanging vines, or share laughs over steaming mugs.
+            </p>
+
+            <!-- 3 Quick Pillars -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              <div class="p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm">
+                <div class="w-9 h-9 rounded-xl bg-coco-latte flex items-center justify-center text-coco-caramel mb-3">
+                  <i data-lucide="flame" class="w-5 h-5"></i>
+                </div>
+                <h4 class="font-serif font-bold text-coco-espresso text-base mb-1">Micro Roasts</h4>
+                <p class="text-xs text-coco-mocha/70">Small-batch drum roasting twice weekly for peak crema flavor.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm">
+                <div class="w-9 h-9 rounded-xl bg-coco-latte flex items-center justify-center text-coco-caramel mb-3">
+                  <i data-lucide="wheat" class="w-5 h-5"></i>
+                </div>
+                <h4 class="font-serif font-bold text-coco-espresso text-base mb-1">In-House Bakery</h4>
+                <p class="text-xs text-coco-mocha/70">100% butter lamination, natural levain breads, baked at dawn.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm">
+                <div class="w-9 h-9 rounded-xl bg-coco-latte flex items-center justify-center text-coco-caramel mb-3">
+                  <i data-lucide="leaf" class="w-5 h-5"></i>
+                </div>
+                <h4 class="font-serif font-bold text-coco-espresso text-base mb-1">Lush Space</h4>
+                <p class="text-xs text-coco-mocha/70">Surrounded by live hanging plants, wood tables & cozy nooks.</p>
+              </div>
+            </div>
+
+            <!-- Meet the Barista Note -->
+            <div class="flex items-center gap-4 pt-2">
+              <img src="images/signature-latte.jpg" alt="Chuska Signature coffee"
+                class="w-14 h-14 rounded-full object-cover border-2 border-coco-caramel shadow-warm">
+              <div>
+                <p class="font-serif italic font-bold text-coco-espresso text-base">"Every cup is a canvas of flavour
+                  and heart."</p>
+                <p class="text-xs text-coco-caramel font-semibold uppercase tracking-wider">— The Chuska Barista
+                  Collective</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MENU SECTION ==================== -->
+    <section id="menu" class="py-20 sm:py-28 bg-coco-latte/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coco-caramel/15 text-coco-caramel text-xs font-bold uppercase tracking-wider mb-3">
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            <span>Carefully Curated</span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coco-espresso mb-4">
+            Our Signature <span class="italic font-normal text-coco-caramel">Menu</span>
+          </h2>
+          <p class="text-coco-roast/80 text-base sm:text-lg">
+            Prepared fresh to order using organic dairy, direct-trade espresso roasts, and seasonal local ingredients.
+          </p>
+
+          <!-- Category Filter Tabs -->
+          <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mt-8" id="menuTabs">
+            <button onclick="filterMenu('all')"
+              class="menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-coco-caramel text-white shadow-warm"
+              data-category="all">
+              All Creations
+            </button>
+            <button onclick="filterMenu('coffee')"
+              class="menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-white text-coco-roast hover:bg-coco-sand/60 border border-coco-sand shadow-warm-sm"
+              data-category="coffee">
+              Specialty Coffee
+            </button>
+            <button onclick="filterMenu('coolers')"
+              class="menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-white text-coco-roast hover:bg-coco-sand/60 border border-coco-sand shadow-warm-sm"
+              data-category="coolers">
+              Coolers & Teas
+            </button>
+            <button onclick="filterMenu('bakery')"
+              class="menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-white text-coco-roast hover:bg-coco-sand/60 border border-coco-sand shadow-warm-sm"
+              data-category="bakery">
+              Bakery & Sweets
+            </button>
+            <button onclick="filterMenu('brunch')"
+              class="menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-white text-coco-roast hover:bg-coco-sand/60 border border-coco-sand shadow-warm-sm"
+              data-category="brunch">
+              Brunch & Savory
+            </button>
+          </div>
+        </div>
+
+        <!-- Menu Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="menuGrid">
+
+          <!-- Item 1: Signature Spiderweb Latte -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="coffee">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/signature-latte.jpg" alt="Chuska Signature Spiderweb Latte"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-caramel text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Chef's Special
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Chuska Signature Latte</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$5.50</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Double shot dark roast espresso topped with velvety microfoam, hand-etched spiderweb chocolate drizzle
+                and roasted whole Arabica bean.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Served with speculoos biscuit</span>
+              <button onclick="addToOrder('Chuska Signature Latte', 5.50)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 2: Heart Velvety Cappuccino -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="coffee">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/heart-cappuccino.jpg" alt="Classic Heart Cappuccino"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-roast text-coco-latte text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Classic
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Heart Silken Cappuccino</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$4.80</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Rich equal parts espresso, steamed milk, and dense creamy foam finished with an artisan tulip heart
+                pour.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Choice of Oat, Almond or Whole Milk</span>
+              <button onclick="addToOrder('Heart Silken Cappuccino', 4.80)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 3: Iced Salted Caramel Macchiato -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="coolers">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/iced-caramel-latte.jpg" alt="Iced Salted Caramel Macchiato"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Best Seller
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Iced Salted Caramel Latte</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$6.20</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Cold-pressed espresso poured over crystal clear ice cubes, sweet vanilla cream, and handcrafted salted
+                amber caramel drizzle.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Served chilled with steel straw</span>
+              <button onclick="addToOrder('Iced Salted Caramel Latte', 6.20)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 4: Belgian Hot Chocolate -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="coffee">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/hot-chocolate.jpg" alt="Belgian Hot Chocolate with Cocoa Flakes"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-mocha text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Comfort Pick
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Belgian Truffle Cocoa</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$5.25</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                70% single-origin Belgian dark chocolate slowly melted in creamy whole milk, crowned with dark chocolate
+                shavings.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Option to add toasted marshmallows</span>
+              <button onclick="addToOrder('Belgian Truffle Cocoa', 5.25)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 5: Citrus Infusion & Orange Tea Cake -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="coolers">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/fruit-tea-cake.jpg" alt="Citrus Infusion Fruit Tea with Candied Orange Loaf Cake"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-forest text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  High Tea Pair
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Citrus Tea & Orange Loaf</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$7.80</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Fresh apple and mint fruit-infused warm herbal tea in a glass pot, paired with a moist candied orange
+                pound cake and butter cookies.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Complete tea set with honey</span>
+              <button onclick="addToOrder('Citrus Tea & Orange Loaf Set', 7.80)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 6: Espresso Tiramisu & Cappuccino Pair -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="bakery">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/tiramisu-coffee.jpg" alt="Housemade Espresso Tiramisu with Cappuccino"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-caramel text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  House Special
+                </div>
+                <div
+                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-coco-espresso text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Veg
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Housemade Tiramisu Slice</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$6.50</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Savoiardi ladyfingers steeped in our house espresso and dark rum, layered with whipped mascarpone cream
+                and dusted with Valrhona cocoa.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Made fresh every morning</span>
+              <button onclick="addToOrder('Housemade Tiramisu Slice', 6.50)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 7: Chuska Grand Brunch Platter -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="brunch">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/breakfast-platter.jpg" alt="Chuska Grand English Breakfast Platter"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-amber-700 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Hearty Brunch
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Grand Breakfast Platter</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$13.95</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Artisanal sourdough toast with butter, folded herb omelette, grilled chicken sausages, baked beans,
+                golden hashbrowns, sautéed button mushrooms & charred tomato.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Includes fresh orange juice</span>
+              <button onclick="addToOrder('Grand Breakfast Platter', 13.95)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 8: Crispy Chicken Alfredo -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="brunch">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/chicken-alfredo.jpg" alt="Artisanal Crispy Chicken Alfredo Pasta"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-forest text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Gourmet Savory
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Artisanal Chicken Alfredo</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$14.50</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Handcrafted fettuccine swirled in velvety garlic parmesan cream sauce, topped with golden panko chicken
+                cutlet, cracked pepper & edible pansy blossoms.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Served with garlic focaccia</span>
+              <button onclick="addToOrder('Artisanal Chicken Alfredo', 14.50)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 9: Parisian Croissant & Flat White Spread -->
+          <div
+            class="menu-item bg-white rounded-3xl p-5 border border-coco-sand shadow-warm hover:shadow-warm-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+            data-category="brunch">
+            <div>
+              <div class="relative rounded-2xl overflow-hidden h-52 mb-4 group">
+                <img src="images/brunch-table.jpg" alt="Butter Croissants and Flat White Combo"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div
+                  class="absolute top-3 left-3 bg-coco-caramel text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Morning Ritual
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-serif font-bold text-xl text-coco-espresso">Parisian Croissant Duo</h3>
+                <span class="font-serif font-bold text-lg text-coco-caramel whitespace-nowrap">$9.50</span>
+              </div>
+              <p class="text-xs sm:text-sm text-coco-mocha/75 line-clamp-2 mb-4">
+                Two French butter croissants filled with smoked turkey ham or melted Emmental cheese, served alongside
+                an aromatic flat white.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-coco-sand/60">
+              <span class="text-[11px] text-coco-mocha/60 italic font-serif">Vegetarian cheese option available</span>
+              <button onclick="addToOrder('Parisian Croissant Duo', 9.50)"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-coco-caramel hover:text-coco-caramelHover bg-coco-latte hover:bg-coco-sand px-3.5 py-1.5 rounded-full transition-colors">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Download Menu PDF Banner -->
+        <div
+          class="mt-14 p-6 sm:p-8 rounded-3xl bg-coco-roast text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-warm-lg">
+          <div class="flex items-center gap-4 text-center sm:text-left">
+            <div
+              class="w-12 h-12 rounded-2xl bg-coco-caramel/30 border border-coco-caramel flex items-center justify-center shrink-0">
+              <i data-lucide="coffee" class="w-6 h-6 text-coco-crema"></i>
+            </div>
+            <div>
+              <h4 class="font-serif text-xl font-bold">Have Dietary Preferences or Allergies?</h4>
+              <p class="text-xs sm:text-sm text-coco-latte/80">We offer oat milk, almond milk, decaf beans, vegan baked
+                items, and gluten-free breads upon request.</p>
+            </div>
+          </div>
+          <button onclick="showToast('Downloading full nutritional menu...')"
+            class="whitespace-nowrap px-6 py-3 rounded-full bg-coco-crema hover:bg-coco-gold text-coco-espresso font-semibold text-xs sm:text-sm transition-colors flex items-center gap-2 shadow-sm">
+            <i data-lucide="download" class="w-4 h-4"></i> Download Full Menu PDF
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== PICTURES OF THE PLACE (AMBIENCE & GALLERY) ==================== -->
+    <section id="gallery" class="py-20 sm:py-28 bg-coco-cream relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coco-forest/10 text-coco-forest text-xs font-bold uppercase tracking-wider mb-3">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+              <span>Visual Journey</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coco-espresso">
+              Step Inside <span class="italic font-normal text-coco-caramel">Chuska Sanctuary</span>
+            </h2>
+            <p class="text-coco-roast/80 text-base max-w-xl mt-3">
+              Surrounded by cascading natural ferns, warm wooden chandeliers, sunlit tables, and the soothing hum of our
+              espresso machine.
+            </p>
+          </div>
+
+          <div class="text-xs text-coco-mocha/70 flex items-center gap-2">
+            <i data-lucide="info" class="w-4 h-4 text-coco-caramel"></i>
+            <span>Click any photo to view full resolution lightbox</span>
+          </div>
+        </div>
+
+        <!-- Gallery Grid with Varying Aspect Ratios & Real Photos -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Image 1: Main Cafe Interior with Plants -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/hero-interior.jpg', 'The Lush Main Hall & Barista Counter', 'Surrounded by hanging creepers, wooden fixtures and warm ambient filament bulbs.')">
+            <img src="images/hero-interior.jpg" alt="Chuska Cafe interior view"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Interior
+                Space</span>
+              <h4 class="font-serif text-xl font-bold">The Botanical Lounge & Coffee Bar</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Hanging ferns & custom walnut wood seating</p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Image 2: Pouring Latte Art -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/barista-pour.jpg', 'Barista Pouring Microfoam', 'Poured with fresh local dairy steamed to a silky 65°C.')">
+            <img src="images/barista-pour.jpg" alt="Barista pouring latte art"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Barista
+                Craft</span>
+              <h4 class="font-serif text-xl font-bold">The Art of Extraction</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Freshly steamed microfoam layered on double ristretto</p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Image 3: Morning Croissant & Coffee Table -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/brunch-table.jpg', 'Morning Croissants & Coffee Table', 'Warm sun rays streaming across our oak communal tables.')">
+            <img src="images/brunch-table.jpg" alt="Sunny brunch spread at Chuska Cafe"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Morning
+                Rituals</span>
+              <h4 class="font-serif text-xl font-bold">Sunny Brunch Tables</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Crisp butter croissants, freshly pressed juices & flat whites
+              </p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Image 4: Artisanal Chicken Alfredo Pasta -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/chicken-alfredo.jpg', 'Gourmet Fettuccine Alfredo', 'Plated with crispy herb chicken cutlet on speckled stoneware.')">
+            <img src="images/chicken-alfredo.jpg" alt="Crispy chicken alfredo on artisan ceramic plate"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Savory
+                Delights</span>
+              <h4 class="font-serif text-xl font-bold">Artisanal Dining</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Hearty handcrafted meals made fresh all afternoon</p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Image 5: High Tea Citrus Infusion & Orange Pound Cake -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/fruit-tea-cake.jpg', 'Citrus Infusion Tea & Tea Cake', 'Served with glass teapot and handcrafted cedar board.')">
+            <img src="images/fruit-tea-cake.jpg" alt="Citrus fruit tea and orange pound cake on wooden board"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Afternoon
+                Tea</span>
+              <h4 class="font-serif text-xl font-bold">Tea & Bakes Haven</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Slow-steeped botanicals paired with candied citrus cake</p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Image 6: Tiramisu & Classic Cappuccino -->
+          <div class="group relative rounded-3xl overflow-hidden shadow-warm cursor-pointer bg-coco-sand h-80"
+            onclick="openLightbox('images/tiramisu-coffee.jpg', 'Housemade Tiramisu on Slate', 'Rich Italian cocoa and espresso soaked ladyfingers with hot cappuccino.')">
+            <img src="images/tiramisu-coffee.jpg" alt="Tiramisu and cappuccino at Chuska"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-coco-espresso/90 via-coco-espresso/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <span class="text-xs uppercase tracking-widest text-coco-crema font-display font-semibold">Dessert
+                Bar</span>
+              <h4 class="font-serif text-xl font-bold">Sweet Indulgence</h4>
+              <p class="text-xs text-coco-latte/80 mt-1">Valrhona dusted tiramisu on natural slate with freshly pulled
+                latte</p>
+            </div>
+            <div
+              class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Instagram Community Banner -->
+        <div class="mt-12 text-center">
+          <p class="text-sm font-medium text-coco-mocha/80 mb-3">Tag us in your photos to get featured on our board!</p>
+          <a href="https://instagram.com" target="_blank"
+            class="inline-flex items-center gap-2 text-coco-caramel hover:text-coco-caramelHover font-semibold text-sm underline decoration-coco-caramel/40 transition-colors">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+            <span>Follow @ChuskaCafe.Official on Instagram</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== GOOGLE REVIEWS SECTION ==================== -->
+    <section id="reviews" class="py-20 sm:py-28 bg-coco-latte/50 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header & Aggregate Google Rating Box -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-8">
+          <div>
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/90 shadow-sm text-xs font-semibold text-gray-700 mb-3.5">
+              <!-- Google G Logo -->
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              <span>Google Verified Reviews</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coco-espresso">
+              What People Say On <span class="italic font-normal text-coco-caramel">Google</span>
+            </h2>
+            <p class="text-coco-roast/80 text-base max-w-xl mt-3">
+              Genuine 5-star ratings and dining experiences shared by our real guests on Google Maps.
+            </p>
+          </div>
+
+          <!-- Google Rating Summary Box -->
+          <div
+            class="bg-white p-5 sm:p-6 rounded-3xl border border-gray-200/90 shadow-warm flex flex-col sm:flex-row items-center gap-6 shrink-0">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center shadow-sm border border-gray-100">
+                <svg class="w-7 h-7" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-serif text-3xl sm:text-4xl font-bold text-coco-espresso">4.9</span>
+                  <div class="flex text-[#F4B400] text-sm tracking-wide">
+                    ★★★★★
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 font-medium mt-0.5">Overall rating · 850+ Google reviews</p>
+              </div>
+            </div>
+            <div class="h-10 w-px bg-gray-200 hidden sm:block"></div>
+            <a href="https://maps.google.com" target="_blank"
+              class="inline-flex items-center gap-2 bg-[#1a73e8] hover:bg-[#1557b0] text-white px-5 py-2.5 rounded-full text-xs font-semibold shadow-sm transition-all hover:shadow-md">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+              <span>Write a Review on Google</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 6 Authentic Google Reviews Grid (3x2) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+
+          <!-- Google Review 1 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#1a73e8] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    R
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Rohan Sharma</h5>
+                    <div class="flex items-center gap-1 text-[11px] text-[#ea4335] font-semibold mt-0.5">
+                      <span>★ Local Guide</span>
+                      <span class="text-gray-400 font-normal">· 56 reviews · 112 photos</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Google G Mini Logo -->
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">3 days ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Breakfast</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">₹200–400</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                Hands down the best coffee spot in Green Park! The <strong>Chuska Signature Latte</strong> with the
+                spiderweb chocolate drizzle isn't just aesthetic, the espresso roast is deeply aromatic with zero
+                bitterness. Pair it with the warm butter croissant – pure perfection. The lush hanging plants overhead
+                and low-fi jazz music make it the coziest hangout. Highly recommend visiting on a weekday morning!
+              </p>
+
+              <!-- Owner Response (Google Feature) -->
+              <div class="bg-gray-50 border-l-2 border-[#1a73e8] p-3 rounded-r-xl mb-3 text-xs">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-gray-900">Response from Chuska Cafe (Owner)</span>
+                  <span class="text-[10px] text-gray-400">2 days ago</span>
+                </div>
+                <p class="text-gray-600 leading-normal">
+                  Thank you so much Rohan! We are thrilled you loved the signature latte and our botanical space. See you
+                  again for your morning brew! ☕🌿
+                </p>
+              </div>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (18)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+          <!-- Google Review 2 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#e37400] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    P
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Pooja Hegde</h5>
+                    <div class="flex items-center gap-1 text-[11px] text-[#ea4335] font-semibold mt-0.5">
+                      <span>★ Local Guide</span>
+                      <span class="text-gray-400 font-normal">· 29 reviews · 44 photos</span>
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">a week ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Family Brunch</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">₹400–600</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                Visited Chuska Cafe for Sunday brunch with my family. The <strong>Grand Breakfast Platter</strong> is
+                huge and totally worth it – crispy hashbrowns, fluffy cheese omelette, grilled sausages and fresh
+                sourdough toast. My daughter loved their Belgian Truffle Hot Cocoa. Very polite staff and clean
+                restrooms. Plus, free valet parking is a huge relief in this busy area!
+              </p>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (12)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+          <!-- Google Review 3 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#0d652d] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    A
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Aman Verma</h5>
+                    <div class="flex items-center gap-1 text-[11px] text-[#ea4335] font-semibold mt-0.5">
+                      <span>★ Local Guide</span>
+                      <span class="text-gray-400 font-normal">· 48 reviews · 83 photos</span>
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">2 weeks ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Coffee & Work</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Food: 5/5</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">WiFi: 5/5</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                The ultimate remote-work sanctuary! High-speed Wi-Fi (easily 100+ Mbps), plenty of power sockets near the
+                leather banquettes, and comfortable seating. Ordered the <strong>Iced Salted Caramel Latte</strong> and
+                it was refreshing with the right sweetness. Staff doesn’t rush you even if you work for hours. A 10/10
+                spot for digital nomads!
+              </p>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (24)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+          <!-- Google Review 4 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#9c27b0] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    S
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Sarah Jenkins</h5>
+                    <span class="text-[11px] text-gray-500 font-normal">14 reviews · 6 photos</span>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">3 weeks ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Lunch</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">₹400–600</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                Stumbled upon Chuska Cafe while exploring the promenade and I’m so glad we walked in! Their <strong>Artisanal
+                Chicken Alfredo Pasta</strong> blew me away – creamy garlic parmesan sauce, al dente fettuccine, and the
+                crispy panko chicken cutlet was super juicy. Finished the meal with their fresh <strong>Housemade
+                Tiramisu Slice</strong>. Beautiful European bistro vibes in Delhi!
+              </p>
+
+              <!-- Owner Response -->
+              <div class="bg-gray-50 border-l-2 border-[#1a73e8] p-3 rounded-r-xl mb-3 text-xs">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-gray-900">Response from Chuska Cafe (Owner)</span>
+                  <span class="text-[10px] text-gray-400">3 weeks ago</span>
+                </div>
+                <p class="text-gray-600 leading-normal">
+                  Hi Sarah, so delighted you enjoyed our pasta and tiramisu! Our culinary team makes everything fresh from
+                  scratch every single day. Can't wait to welcome you back!
+                </p>
+              </div>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (9)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+          <!-- Google Review 5 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#b06000] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    K
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Kabir Malhotra</h5>
+                    <div class="flex items-center gap-1 text-[11px] text-[#ea4335] font-semibold mt-0.5">
+                      <span>★ Local Guide</span>
+                      <span class="text-gray-400 font-normal">· 22 reviews · 35 photos</span>
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">a month ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Evening Coffee</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Atmosphere: 5/5</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                Took my partner here for an evening coffee date. The warm filament lighting under the hanging ivy creates
+                such a romantic, cozy atmosphere. We ordered the <strong>Heart Silken Cappuccino</strong> and the
+                <strong>Citrus Infusion Tea & Orange Loaf Cake</strong> set. The tea pot presentation on the rustic wooden
+                board is so photogenic. Top-tier hospitality!
+              </p>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (15)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+          <!-- Google Review 6 -->
+          <div
+            class="bg-white p-6 rounded-3xl border border-gray-200/90 shadow-warm hover:shadow-warm-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <!-- User Header -->
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#d93025] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                    S
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-gray-900 leading-tight">Sneha Patel</h5>
+                    <div class="flex items-center gap-1 text-[11px] text-[#ea4335] font-semibold mt-0.5">
+                      <span>★ Local Guide</span>
+                      <span class="text-gray-400 font-normal">· 37 reviews · 62 photos</span>
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 shrink-0 opacity-80" viewBox="0 0 24 24">
+                  <path fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+              </div>
+
+              <!-- Rating & Timestamp -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[#F4B400] text-sm tracking-wider font-bold">★★★★★</span>
+                <span class="text-xs text-gray-500">2 months ago</span>
+              </div>
+
+              <!-- Google Context Tags -->
+              <div class="text-[11px] text-gray-600 font-medium mb-3 flex flex-wrap gap-1.5">
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Dine in</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Birthday Brunch</span>
+                <span class="bg-gray-100 px-2 py-0.5 rounded-md">Service: 5/5</span>
+              </div>
+
+              <!-- Review Text -->
+              <p class="text-gray-700 text-xs sm:text-sm leading-relaxed mb-4">
+                Booked a table for 6 through their website for my sister's birthday brunch. Table was reserved and
+                decorated nicely on the garden patio (pet friendly too!). The staff was thoughtful enough to bring a
+                complimentary dessert with a sparkle candle. Food came fast and hot. Definitely our new favorite spot for
+                special occasions!
+              </p>
+            </div>
+
+            <!-- Google Helpful Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-gray-500">
+              <span class="inline-flex items-center gap-1.5 hover:text-[#1a73e8] cursor-pointer transition-colors">
+                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Helpful (21)
+              </span>
+              <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i> Verified on Google
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== LOCATION & OPENING HOURS SECTION ==================== -->
+    <section id="location" class="py-20 sm:py-28 bg-coco-cream relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coco-forest/10 text-coco-forest text-xs font-bold uppercase tracking-wider mb-3">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+            <span>Find Our Corner</span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coco-espresso mb-4">
+            Visit Us at <span class="italic font-normal text-coco-caramel">Chuska Cafe</span>
+          </h2>
+          <p class="text-coco-roast/80 text-base sm:text-lg">
+            Centrally located in the historic garden promenade, easy to reach by subway or car with dedicated valet
+            parking.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Hours & Details Card (5 cols) -->
+          <div
+            class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-coco-sand shadow-warm flex flex-col justify-between space-y-6">
+
+            <div>
+              <!-- Address Details -->
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-coco-latte text-coco-caramel flex items-center justify-center shrink-0">
+                  <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h4 class="font-serif font-bold text-xl text-coco-espresso">Our Sanctuary Address</h4>
+                  <p class="text-coco-roast/80 text-sm mt-1">42 Rosewood Boulevard, Green Park Promenade<br>Near Old
+                    Botanical Library, Metro Station Gate 3</p>
+                  <p class="text-xs text-coco-caramel font-semibold mt-1">Free underground parking & valet service</p>
+                </div>
+              </div>
+
+              <!-- Opening Hours Table with Dynamic Open/Closed Status -->
+              <div class="bg-coco-cream p-5 rounded-2xl border border-coco-sand mb-6">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-coco-sand">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="clock" class="w-4 h-4 text-coco-caramel"></i>
+                    <span class="font-serif font-bold text-sm text-coco-espresso">Operating Hours</span>
+                  </div>
+                  <span id="locationStatusBadge"
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open Today
+                  </span>
+                </div>
+
+                <div class="space-y-2 text-xs sm:text-sm text-coco-roast">
+                  <div class="flex justify-between items-center py-1">
+                    <span class="font-medium">Monday – Thursday</span>
+                    <span class="font-semibold text-coco-espresso">7:30 AM – 10:00 PM</span>
+                  </div>
+                  <div class="flex justify-between items-center py-1 bg-white/70 px-2 rounded-lg">
+                    <span class="font-bold text-coco-caramel">Friday & Saturday</span>
+                    <span class="font-bold text-coco-espresso">7:30 AM – 11:30 PM</span>
+                  </div>
+                  <div class="flex justify-between items-center py-1">
+                    <span class="font-medium">Sunday & Public Holidays</span>
+                    <span class="font-semibold text-coco-espresso">8:00 AM – 10:00 PM</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cafe Amenities Checklist -->
+              <div class="grid grid-cols-2 gap-3 text-xs text-coco-roast font-medium">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Free Gigabit Wi-Fi
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Pet Friendly Patio
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Laptop Friendly Zones
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Wheelchair Accessible
+                </div>
+              </div>
+            </div>
+
+            <!-- Get Directions Button -->
+            <div class="pt-4 border-t border-coco-sand flex flex-col sm:flex-row gap-3">
+              <a href="https://maps.google.com" target="_blank"
+                class="w-full inline-flex items-center justify-center gap-2 bg-coco-caramel hover:bg-coco-caramelHover text-white py-3.5 px-6 rounded-2xl font-semibold text-sm transition-all shadow-warm">
+                <i data-lucide="navigation" class="w-4 h-4"></i>
+                <span>Get Driving Directions</span>
+              </a>
+              <a href="tel:+15558394210"
+                class="inline-flex items-center justify-center gap-2 bg-coco-latte hover:bg-coco-sand text-coco-roast py-3.5 px-5 rounded-2xl font-semibold text-sm transition-all">
+                <i data-lucide="phone" class="w-4 h-4"></i> Call (+1 555-839-4210)
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Interactive Google Maps Iframe (7 cols) -->
+          <div
+            class="lg:col-span-7 rounded-3xl overflow-hidden border border-coco-sand shadow-warm min-h-[380px] relative">
+            <iframe title="Chuska Cafe Location Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.606232599723!2d77.20658427549783!3d28.55153287570889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce27027b40073%3A0xb304a0980b188c0!2sGreen%20Park%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              class="w-full h-full min-h-[420px] border-0 filter saturate-90 contrast-105" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <!-- Subtle floating badge on map -->
+            <div
+              class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-warm border border-coco-sand text-xs flex items-center gap-3 pointer-events-none">
+              <div class="w-8 h-8 rounded-full bg-coco-caramel text-white flex items-center justify-center font-bold">☕
+              </div>
+              <div>
+                <p class="font-serif font-bold text-coco-espresso">Chuska Cafe Main Roastery</p>
+                <p class="text-[11px] text-coco-mocha/70">Green Park Promenade, Gate 3</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT & TABLE RESERVATION SECTION ==================== -->
+    <section id="reservation" class="py-20 sm:py-28 bg-coco-latte/70 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+          <!-- Left Column: Contact Details & Social Connect -->
+          <div id="contact" class="lg:col-span-5 space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coco-caramel/15 text-coco-caramel text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+              <span>Connect With Us</span>
+            </div>
+
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coco-espresso leading-tight">
+              Reserve Your Table <br>
+              <span class="italic font-normal text-coco-caramel">Or Say Hello</span>
+            </h2>
+
+            <p class="text-coco-roast/80 text-base leading-relaxed">
+              Planning a birthday brunch, a quiet work session, or an evening coffee date with friends? Book ahead to
+              skip the queue, or contact us directly.
+            </p>
+
+            <!-- Quick Contact Channels -->
+            <div class="space-y-4 pt-2">
+              <a href="tel:+15558394210"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm hover:border-coco-caramel transition-all group">
+                <div
+                  class="w-12 h-12 rounded-xl bg-coco-latte group-hover:bg-coco-caramel text-coco-caramel group-hover:text-white flex items-center justify-center transition-colors">
+                  <i data-lucide="phone-call" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs text-coco-mocha/60 block font-medium">Direct Telephone & Bookings</span>
+                  <span class="text-base font-bold text-coco-espresso">+1 (555) 839-4210 / +1 (555) CHUSKA-CAFE</span>
+                </div>
+              </a>
+
+              <a href="https://wa.me/15558394210?text=Hi%20Chuska%20Cafe%21%20I%27d%20like%20to%20reserve%20a%20table%20or%20inquire%20about%20the%20menu."
+                target="_blank"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm hover:border-emerald-500 transition-all group">
+                <div
+                  class="w-12 h-12 rounded-xl bg-emerald-50 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white flex items-center justify-center transition-colors">
+                  <i data-lucide="message-circle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs text-coco-mocha/60 block font-medium">Instant WhatsApp Concierge</span>
+                  <span class="text-base font-bold text-coco-espresso">Chat with our Host (+1 555-839-4210)</span>
+                </div>
+              </a>
+
+              <a href="mailto:hello@chuskacafe.com"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-coco-sand shadow-warm-sm hover:border-coco-caramel transition-all group">
+                <div
+                  class="w-12 h-12 rounded-xl bg-coco-latte group-hover:bg-coco-caramel text-coco-caramel group-hover:text-white flex items-center justify-center transition-colors">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-xs text-coco-mocha/60 block font-medium">Events & Media Inquiries</span>
+                  <span class="text-base font-bold text-coco-espresso">hello@chuskacafe.com</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Social Handles Pill List -->
+            <div class="pt-4">
+              <span class="text-xs font-semibold text-coco-roast block mb-3 uppercase tracking-wider">Social Feed &
+                Stories:</span>
+              <div class="flex items-center gap-3">
+                <a href="https://instagram.com" target="_blank"
+                  class="w-10 h-10 rounded-full bg-white border border-coco-sand flex items-center justify-center text-coco-roast hover:bg-coco-caramel hover:text-white transition-all shadow-sm">
+                  <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank"
+                  class="w-10 h-10 rounded-full bg-white border border-coco-sand flex items-center justify-center text-coco-roast hover:bg-coco-caramel hover:text-white transition-all shadow-sm">
+                  <i data-lucide="facebook" class="w-4 h-4"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank"
+                  class="w-10 h-10 rounded-full bg-white border border-coco-sand flex items-center justify-center text-coco-roast hover:bg-coco-caramel hover:text-white transition-all shadow-sm">
+                  <i data-lucide="music-2" class="w-4 h-4"></i>
+                </a>
+                <a href="https://pinterest.com" target="_blank"
+                  class="w-10 h-10 rounded-full bg-white border border-coco-sand flex items-center justify-center text-coco-roast hover:bg-coco-caramel hover:text-white transition-all shadow-sm">
+                  <i data-lucide="pin" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Interactive Table Reservation Form (7 cols) -->
+          <div class="lg:col-span-7">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-coco-sand shadow-warm-xl relative">
+
+              <div class="mb-6">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-coco-espresso">Table Reservation</h3>
+                  <span
+                    class="text-xs bg-coco-latte text-coco-caramel font-bold px-3 py-1 rounded-full uppercase">Instant
+                    Confirmation</span>
+                </div>
+                <p class="text-xs sm:text-sm text-coco-mocha/75 mt-1">Bookings are held for 15 minutes past scheduled
+                  time.</p>
+              </div>
+
+              <!-- Reservation Form -->
+              <form id="reservationForm" onsubmit="handleReservationSubmit(event)" class="space-y-4">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="resName" class="block text-xs font-semibold text-coco-roast mb-1.5">Full Name *</label>
+                    <div class="relative">
+                      <i data-lucide="user" class="w-4 h-4 text-coco-mocha/50 absolute left-3.5 top-3.5"></i>
+                      <input type="text" id="resName" required placeholder="e.g. Julian Parker"
+                        class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="resPhone" class="block text-xs font-semibold text-coco-roast mb-1.5">Phone / WhatsApp
+                      *</label>
+                    <div class="relative">
+                      <i data-lucide="phone" class="w-4 h-4 text-coco-mocha/50 absolute left-3.5 top-3.5"></i>
+                      <input type="tel" id="resPhone" required placeholder="+1 (555) 000-0000"
+                        class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label for="resDate" class="block text-xs font-semibold text-coco-roast mb-1.5">Date *</label>
+                    <div class="relative">
+                      <input type="date" id="resDate" required
+                        class="w-full px-3.5 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="resTime" class="block text-xs font-semibold text-coco-roast mb-1.5">Time Slot *</label>
+                    <select id="resTime" required
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                      <option value="" disabled selected>Select Time</option>
+                      <option value="08:30 AM">08:30 AM (Breakfast)</option>
+                      <option value="10:00 AM">10:00 AM (Morning Brew)</option>
+                      <option value="11:30 AM">11:30 AM (Brunch Rush)</option>
+                      <option value="01:00 PM">01:00 PM (Lunch Hour)</option>
+                      <option value="03:30 PM">03:30 PM (Afternoon High Tea)</option>
+                      <option value="05:30 PM">05:30 PM (Sunset Coffee)</option>
+                      <option value="07:30 PM">07:30 PM (Cozy Dinner)</option>
+                      <option value="09:00 PM">09:00 PM (Late Night Cocoa)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="resGuests" class="block text-xs font-semibold text-coco-roast mb-1.5">Guests *</label>
+                    <select id="resGuests" required
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                      <option value="1">1 Person (Quiet work)</option>
+                      <option value="2" selected>2 People (Date / Cozy)</option>
+                      <option value="3">3 People</option>
+                      <option value="4">4 People (Family table)</option>
+                      <option value="5-8">5 - 8 People (Group)</option>
+                      <option value="8+">8+ People (Event/Party)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="resEmail" class="block text-xs font-semibold text-coco-roast mb-1.5">Email for
+                      Confirmation *</label>
+                    <div class="relative">
+                      <i data-lucide="mail" class="w-4 h-4 text-coco-mocha/50 absolute left-3.5 top-3.5"></i>
+                      <input type="email" id="resEmail" required placeholder="julian@example.com"
+                        class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="resArea" class="block text-xs font-semibold text-coco-roast mb-1.5">Seating
+                      Preference</label>
+                    <select id="resArea"
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all">
+                      <option value="Indoor Botanical Hall">Indoor Botanical Hall (Under Hanging Vines)</option>
+                      <option value="Window Street View">Window Street View</option>
+                      <option value="Outdoor Sunlit Patio">Outdoor Garden Patio (Pet Friendly)</option>
+                      <option value="Espresso Bar Front">Barista Espresso Bar High Stool</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="resNotes" class="block text-xs font-semibold text-coco-roast mb-1.5">Special Requests or
+                    Celebration Notes (Optional)</label>
+                  <textarea id="resNotes" rows="2"
+                    placeholder="e.g., Birthday surprise dessert candle, quiet work desk, high chair for infant..."
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-coco-sand focus:border-coco-caramel focus:ring-2 focus:ring-coco-caramel/20 outline-none text-sm bg-coco-cream/30 text-coco-espresso transition-all"></textarea>
+                </div>
+
+                <div class="pt-2">
+                  <button type="submit" id="reserveSubmitBtn"
+                    class="w-full bg-coco-caramel hover:bg-coco-caramelHover text-white py-3.5 px-6 rounded-2xl font-semibold text-base transition-all duration-200 shadow-warm hover:shadow-warm-lg flex items-center justify-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    <span>Confirm & Hold My Table</span>
+                  </button>
+                  <p class="text-[11px] text-center text-coco-mocha/60 mt-2">No advance deposit required. Cancellations
+                    are free anytime.</p>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-coco-espresso text-coco-latte pt-16 pb-12 border-t border-coco-roast/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top Newsletter / Brand Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-coco-roast">
+
+        <!-- Brand Info (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-coco-caramel text-white flex items-center justify-center shadow-warm">
+              <i data-lucide="coffee" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <span class="font-serif text-2xl font-bold tracking-tight text-white">Chuska</span>
+              <span class="font-serif text-2xl font-normal italic text-coco-crema"> Cafe</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-coco-sand/80 max-w-sm leading-relaxed">
+            An artisanal roastery and cozy European bistro dedicated to fair-trade coffee, sourdough Viennoiserie, and
+            the timeless warmth of authentic hospitality.
+          </p>
+          <div class="flex items-center gap-4 text-coco-crema text-xs pt-1">
+            <span class="flex items-center gap-1"><i data-lucide="award" class="w-3.5 h-3.5"></i> Roaster of the Year
+              2024</span>
+            <span>•</span>
+            <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 100% Organic
+              Fair Trade</span>
+          </div>
+        </div>
+
+        <!-- Quick Links (2 cols) -->
+        <div class="lg:col-span-2 space-y-3">
+          <h5 class="font-serif font-bold text-white text-sm uppercase tracking-wider">Explore</h5>
+          <ul class="space-y-2 text-xs text-coco-sand/80">
+            <li><a href="#about" class="hover:text-coco-crema transition-colors">Our Story & Roastery</a></li>
+            <li><a href="#menu" class="hover:text-coco-crema transition-colors">Artisan Menu & Pricing</a></li>
+            <li><a href="#gallery" class="hover:text-coco-crema transition-colors">Cafe Ambience</a></li>
+            <li><a href="#reviews" class="hover:text-coco-crema transition-colors">Guest Testimonials</a></li>
+            <li><a href="#reservation" class="hover:text-coco-crema transition-colors">Table Reservations</a></li>
+          </ul>
+        </div>
+
+        <!-- Hours Summary (2 cols) -->
+        <div class="lg:col-span-2 space-y-3">
+          <h5 class="font-serif font-bold text-white text-sm uppercase tracking-wider">Hours</h5>
+          <ul class="space-y-1.5 text-xs text-coco-sand/80">
+            <li class="font-medium text-white">Mon – Thu:</li>
+            <li class="text-coco-sand/70">7:30 AM – 10:00 PM</li>
+            <li class="font-medium text-white pt-1">Fri – Sat:</li>
+            <li class="text-coco-sand/70">7:30 AM – 11:30 PM</li>
+            <li class="font-medium text-white pt-1">Sunday:</li>
+            <li class="text-coco-sand/70">8:00 AM – 10:00 PM</li>
+          </ul>
+        </div>
+
+        <!-- Newsletter (3 cols) -->
+        <div class="lg:col-span-3 space-y-3">
+          <h5 class="font-serif font-bold text-white text-sm uppercase tracking-wider">The Coffee Journal</h5>
+          <p class="text-xs text-coco-sand/80">Join our newsletter to receive a complimentary pastry voucher and coffee
+            roasting notes.</p>
+          <form onsubmit="handleNewsletter(event)" class="space-y-2">
+            <div class="relative">
+              <input type="email" id="newsletterEmail" required placeholder="Enter your email"
+                class="w-full pl-3.5 pr-10 py-2 rounded-xl bg-white/10 border border-white/20 text-xs text-white placeholder:text-coco-sand/50 focus:outline-none focus:border-coco-crema">
+              <button type="submit"
+                class="absolute right-1.5 top-1.5 p-1 rounded-lg bg-coco-caramel hover:bg-coco-caramelHover text-white transition-colors"
+                title="Subscribe">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <span class="text-[10px] text-coco-sand/60 block">We respect your inbox. Unsubscribe anytime.</span>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Credits & Legal -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-coco-sand/60">
+        <p>© 2026 Chuska Cafe & Roasters. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-coco-crema transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-coco-crema transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-coco-crema transition-colors">Accessibility</a>
+          <a href="#mainHeader" class="hover:text-coco-crema transition-colors flex items-center gap-1">Back to Top
+            ↑</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL: GALLERY LIGHTBOX ==================== -->
+  <div id="lightboxModal"
+    class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-coco-espresso/90 backdrop-blur-md"
+    onclick="closeLightbox(event)">
+    <div
+      class="modal-content relative max-w-4xl w-full bg-coco-espresso rounded-3xl overflow-hidden border border-white/15 shadow-warm-xl"
+      onclick="event.stopPropagation()">
+      <button onclick="closeLightboxModal()"
+        class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="relative max-h-[75vh] overflow-hidden bg-black flex items-center justify-center">
+        <img id="lightboxImage" src="" alt="Chuska Cafe Lightbox Image"
+          class="max-h-[75vh] w-auto max-w-full object-contain">
+      </div>
+      <div class="p-6 bg-coco-roast text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h4 id="lightboxTitle" class="font-serif text-xl font-bold text-coco-crema">Image Title</h4>
+          <p id="lightboxDescription" class="text-xs sm:text-sm text-coco-latte/80 mt-0.5">Image detailed caption
+            description.</p>
+        </div>
+        <a href="#reservation" onclick="closeLightboxModal()"
+          class="inline-flex items-center gap-1.5 bg-coco-caramel hover:bg-coco-caramelHover text-white text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Reserve This Table
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: RESERVATION SUCCESS CONFIRMATION ==================== -->
+  <div id="bookingSuccessModal"
+    class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-coco-espresso/80 backdrop-blur-sm"
+    onclick="closeBookingModal()">
+    <div
+      class="modal-content relative max-w-md w-full bg-white rounded-3xl p-6 sm:p-8 text-center shadow-warm-xl border border-coco-sand"
+      onclick="event.stopPropagation()">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check" class="w-8 h-8"></i>
+      </div>
+      <span class="text-xs font-bold uppercase tracking-widest text-coco-caramel">Booking Confirmed!</span>
+      <h3 class="font-serif text-2xl font-bold text-coco-espresso mt-1 mb-2">We Can't Wait to Host You!</h3>
+      <p class="text-xs sm:text-sm text-coco-mocha/80 mb-6 leading-relaxed">
+        Your reservation for <strong id="confirmGuests" class="text-coco-espresso">2 guests</strong> on <strong
+          id="confirmDateTime" class="text-coco-espresso">Today at 10:00 AM</strong> has been placed under <strong
+          id="confirmName" class="text-coco-espresso">Guest</strong>.
+      </p>
+
+      <div
+        class="bg-coco-cream p-4 rounded-2xl border border-coco-sand text-left space-y-1.5 text-xs text-coco-roast mb-6">
+        <div class="flex justify-between">
+          <span class="text-coco-mocha/70">Confirmation Code:</span>
+          <span class="font-bold font-mono text-coco-caramel" id="confirmCode">CHUSKA-8849</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-coco-mocha/70">Seating Area:</span>
+          <span class="font-semibold text-coco-espresso" id="confirmArea">Indoor Botanical</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-coco-mocha/70">Hold Duration:</span>
+          <span class="text-coco-espresso">15 mins from booked time</span>
+        </div>
+      </div>
+
+      <button onclick="closeBookingModal()"
+        class="w-full bg-coco-caramel hover:bg-coco-caramelHover text-white py-3 rounded-xl font-semibold text-sm transition-colors shadow-warm">
+        Awesome, Done!
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== DRAWER: ORDER BAG / QUICK CART ==================== -->
+  <div id="orderDrawerBackdrop" class="modal-backdrop fixed inset-0 z-50 bg-coco-espresso/70 backdrop-blur-sm"
+    onclick="closeOrderDrawer()">
+    <div
+      class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-coco-cream shadow-2xl flex flex-col justify-between p-6 overflow-y-auto"
+      onclick="event.stopPropagation()">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-coco-sand mb-4">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-coco-caramel"></i>
+            <h4 class="font-serif font-bold text-xl text-coco-espresso">Your Cafe Bag</h4>
+          </div>
+          <button onclick="closeOrderDrawer()" class="p-2 rounded-full hover:bg-coco-sand/60 text-coco-roast">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div id="cartItemsList" class="space-y-3">
+          <div class="text-center py-12 text-coco-mocha/60">
+            <i data-lucide="coffee" class="w-12 h-12 mx-auto stroke-1 text-coco-sand mb-3"></i>
+            <p class="text-sm font-medium">Your cafe bag is empty.</p>
+            <p class="text-xs text-coco-mocha/50 mt-1">Explore our signature drinks and fresh sourdough brunch items!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-coco-sand mt-6">
+        <div class="flex justify-between items-center text-sm font-semibold text-coco-espresso mb-1">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal" class="font-serif text-lg text-coco-caramel">$0.00</span>
+        </div>
+        <p class="text-[11px] text-coco-mocha/60 mb-4">Taxes & packaging calculated at counter or checkout.</p>
+        <button onclick="handleCheckout()" id="checkoutBtn" disabled
+          class="w-full bg-coco-caramel hover:bg-coco-caramelHover disabled:bg-coco-sand disabled:cursor-not-allowed text-white py-3.5 rounded-2xl font-semibold text-sm transition-all shadow-warm flex items-center justify-center gap-2">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          <span>Proceed to Quick Order</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: LEAVE A REVIEW ==================== -->
+  <div id="reviewModal"
+    class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-coco-espresso/80 backdrop-blur-sm"
+    onclick="closeReviewModal()">
+    <div
+      class="modal-content relative max-w-lg w-full bg-white rounded-3xl p-6 sm:p-8 shadow-warm-xl border border-coco-sand"
+      onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-coco-sand mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-5 h-5 text-coco-caramel"></i>
+          <h4 class="font-serif font-bold text-xl text-coco-espresso">Share Your Experience</h4>
+        </div>
+        <button onclick="closeReviewModal()" class="p-1 rounded-full hover:bg-coco-sand/50 text-coco-roast">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleReviewSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-coco-roast mb-1">Your Star Rating</label>
+          <div class="flex gap-2 text-amber-400 text-2xl cursor-pointer" id="starRatingSelect">
+            <span onclick="setStars(1)" class="star-btn">★</span>
+            <span onclick="setStars(2)" class="star-btn">★</span>
+            <span onclick="setStars(3)" class="star-btn">★</span>
+            <span onclick="setStars(4)" class="star-btn">★</span>
+            <span onclick="setStars(5)" class="star-btn">★</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-coco-roast mb-1">Your Name *</label>
+            <input type="text" id="revName" required placeholder="Jane Doe"
+              class="w-full px-3 py-2 rounded-xl border border-coco-sand text-sm outline-none focus:border-coco-caramel">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-coco-roast mb-1">Favorite Item</label>
+            <input type="text" id="revItem" placeholder="e.g. Signature Latte"
+              class="w-full px-3 py-2 rounded-xl border border-coco-sand text-sm outline-none focus:border-coco-caramel">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-coco-roast mb-1">Your Thoughts *</label>
+          <textarea id="revComment" required rows="3"
+            placeholder="Tell us what you loved about our coffee, ambience or team..."
+            class="w-full px-3 py-2 rounded-xl border border-coco-sand text-sm outline-none focus:border-coco-caramel"></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-coco-caramel hover:bg-coco-caramelHover text-white py-3 rounded-xl font-semibold text-sm transition-colors shadow-warm">
+          Post Review
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotification"
+    class="fixed bottom-6 left-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-coco-espresso text-white px-5 py-3 rounded-2xl shadow-warm-xl border border-white/10 text-sm">
+    <i data-lucide="check-circle" class="w-5 h-5 text-coco-crema"></i>
+    <span id="toastMessage">Action completed!</span>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // Ensure website ALWAYS opens at the top Hero Section on load/refresh
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // If opened with an anchor hash in URL, clear it on fresh load so user starts at Hero
+    window.addEventListener('load', () => {
+      if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    });
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Hamburger Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          menuIcon.setAttribute('data-lucide', 'x');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        }
+        lucide.createIcons();
+      });
+
+      // Auto close mobile menu on link click
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.setAttribute('data-lucide', 'menu');
+          lucide.createIcons();
+        });
+      });
+    }
+
+    // Dynamic Live Opening Status
+    function checkLiveHours() {
+      const now = new Date();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+      const currentTime = hour + (min / 60);
+
+      // Open from 7:30 AM to 10:30 PM
+      const isOpen = (currentTime >= 7.5 && currentTime <= 22.5);
+
+      const headerText = document.getElementById('headerStatusText');
+      const locationBadge = document.getElementById('locationStatusBadge');
+
+      if (isOpen) {
+        if (headerText) headerText.textContent = "Open Now until 10:30 PM";
+        if (locationBadge) {
+          locationBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open Today`;
+          locationBadge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
+        }
+      } else {
+        if (headerText) headerText.textContent = "Closed • Opens at 7:30 AM";
+        if (locationBadge) {
+          locationBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span> Closed Now • Opens 7:30 AM`;
+          locationBadge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800";
+        }
+      }
+    }
+    checkLiveHours();
+
+    // Default Today's date in reservation picker
+    const dateInput = document.getElementById('resDate');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+
+    // Menu Tab Filtering
+    function filterMenu(category) {
+      const tabs = document.querySelectorAll('.menu-tab-btn');
+      tabs.forEach(tab => {
+        if (tab.getAttribute('data-category') === category) {
+          tab.className = "menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-coco-caramel text-white shadow-warm";
+        } else {
+          tab.className = "menu-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all bg-white text-coco-roast hover:bg-coco-sand/60 border border-coco-sand shadow-warm-sm";
+        }
+      });
+
+      const items = document.querySelectorAll('.menu-item');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Gallery Lightbox
+    function openLightbox(imgSrc, title, desc) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImage');
+      const t = document.getElementById('lightboxTitle');
+      const d = document.getElementById('lightboxDescription');
+
+      img.src = imgSrc;
+      t.textContent = title;
+      d.textContent = desc;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightboxModal() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === 'lightboxModal') {
+        closeLightboxModal();
+      }
+    }
+
+    // Reservation Submission
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('resName').value;
+      const guests = document.getElementById('resGuests').value;
+      const date = document.getElementById('resDate').value;
+      const time = document.getElementById('resTime').value;
+      const area = document.getElementById('resArea').value;
+
+      document.getElementById('confirmName').textContent = name;
+      document.getElementById('confirmGuests').textContent = guests + (guests === '1' ? ' guest' : ' guests');
+      document.getElementById('confirmDateTime').textContent = date + ' at ' + time;
+      document.getElementById('confirmArea').textContent = area;
+      document.getElementById('confirmCode').textContent = 'CHUSKA-' + Math.floor(1000 + Math.random() * 9000);
+
+      // Open Success modal
+      const modal = document.getElementById('bookingSuccessModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Reset form
+      document.getElementById('reservationForm').reset();
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingSuccessModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Cart / Bag functionality
+    let cart = [];
+
+    function addToOrder(itemName, itemPrice) {
+      const existing = cart.find(i => i.name === itemName);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name: itemName, price: itemPrice, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`Added ${itemName} to bag!`);
+    }
+
+    function updateCartUI() {
+      const badgeDesktop = document.getElementById('cartCountBadge');
+      const badgeMobile = document.getElementById('cartCountBadgeMobile');
+      const list = document.getElementById('cartItemsList');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      badgeDesktop.textContent = totalItems;
+      badgeMobile.textContent = totalItems;
+
+      if (cart.length === 0) {
+        list.innerHTML = `
+          <div class="text-center py-12 text-coco-mocha/60">
+            <i data-lucide="coffee" class="w-12 h-12 mx-auto stroke-1 text-coco-sand mb-3"></i>
+            <p class="text-sm font-medium">Your cafe bag is empty.</p>
+            <p class="text-xs text-coco-mocha/50 mt-1">Explore our signature drinks and fresh sourdough brunch items!</p>
+          </div>
+        `;
+        subtotalEl.textContent = "$0.00";
+        checkoutBtn.disabled = true;
+      } else {
+        let total = 0;
+        list.innerHTML = cart.map((item, index) => {
+          total += item.price * item.qty;
+          return `
+            <div class="flex items-center justify-between p-3 rounded-2xl bg-white border border-coco-sand">
+              <div>
+                <p class="text-sm font-bold text-coco-espresso">${item.name}</p>
+                <p class="text-xs text-coco-caramel font-semibold">$${item.price.toFixed(2)} each</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="changeQty(${index}, -1)" class="w-6 h-6 rounded-full bg-coco-latte hover:bg-coco-sand flex items-center justify-center font-bold text-coco-roast">-</button>
+                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                <button onclick="changeQty(${index}, 1)" class="w-6 h-6 rounded-full bg-coco-latte hover:bg-coco-sand flex items-center justify-center font-bold text-coco-roast">+</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        subtotalEl.textContent = "$" + total.toFixed(2);
+        checkoutBtn.disabled = false;
+      }
+      lucide.createIcons();
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function openOrderDrawer() {
+      const drawer = document.getElementById('orderDrawerBackdrop');
+      drawer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrderDrawer() {
+      const drawer = document.getElementById('orderDrawerBackdrop');
+      drawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleCheckout() {
+      closeOrderDrawer();
+      showToast("Order received! Our barista is prepping your request.");
+      cart = [];
+      updateCartUI();
+    }
+
+    // Review Modal Functions
+    function openReviewModal() {
+      document.getElementById('reviewModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReviewModal() {
+      document.getElementById('reviewModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    let selectedStars = 5;
+    function setStars(count) {
+      selectedStars = count;
+      const stars = document.querySelectorAll('.star-btn');
+      stars.forEach((s, idx) => {
+        if (idx < count) {
+          s.style.color = '#F59E0B';
+        } else {
+          s.style.color = '#D1D5DB';
+        }
+      });
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      closeReviewModal();
+      showToast("Thank you for sharing your love for Chuska!");
+    }
+
+    // Newsletter Submission
+    function handleNewsletter(e) {
+      e.preventDefault();
+      document.getElementById('newsletterEmail').value = '';
+      showToast("Check your inbox! 10% off voucher sent.");
+    }
+
+    // Toast notification banner
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const text = document.getElementById('toastMessage');
+      text.textContent = message;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    // Keyboard accessibility for modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightboxModal();
+        closeBookingModal();
+        closeOrderDrawer();
+        closeReviewModal();
+      }
+    });
+  </script>
+
+  <!-- ==================== FLOATING RIGHT SOCIAL BUTTONS (WHATSAPP & INSTAGRAM) ==================== -->
+  <aside aria-label="Social Quick Links" class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 items-center">
+    <!-- WhatsApp Floating Logo -->
+    <a href="https://wa.me/15558394210?text=Hi%20Chuska%20Cafe%21%20I%20would%20like%20to%20reserve%20a%20table%20or%20inquire%20about%20the%20menu."
+      target="_blank" rel="noopener noreferrer"
+      class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(37,211,102,0.45)] hover:shadow-[0_12px_35px_rgba(37,211,102,0.65)] transition-all duration-300 hover:scale-110 active:scale-95 group relative"
+      title="Chat on WhatsApp">
+      <!-- WhatsApp Icon -->
+      <svg class="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.586 1.761.88 2.791.88 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm9.969 5.766c0 5.503-4.467 9.97-9.969 9.97-1.745 0-3.385-.45-4.821-1.246l-5.21 1.366 1.39-5.078c-.888-1.488-1.39-3.226-1.39-5.08 0-5.504 4.467-9.97 9.97-9.97 5.502 0 9.969 4.466 9.969 9.97z" />
+      </svg>
+      <!-- Tooltip -->
+      <span
+        class="absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-coco-espresso text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md hidden sm:block">
+        WhatsApp
+      </span>
+    </a>
+
+    <!-- Instagram Floating Logo -->
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+      class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(220,39,67,0.4)] hover:shadow-[0_12px_35px_rgba(220,39,67,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 group relative"
+      title="Follow on Instagram">
+      <!-- Instagram Icon -->
+      <svg class="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+      </svg>
+      <!-- Tooltip -->
+      <span
+        class="absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-coco-espresso text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md hidden sm:block">
+        Instagram
+      </span>
+    </a>
+  </aside>
+</body>
+
+</html>
